@@ -1,0 +1,502 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    android:background="#121212"> <!-- Dark Background -->
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="16dp">
+
+        <!-- Display for the calculator -->
+        <TextView
+            android:id="@+id/tvResult"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:background="#1F1F1F"
+            android:gravity="end"
+            android:padding="16dp"
+            android:text="0"
+            android:textColor="#FFFFFF"
+            android:textSize="32sp"
+            android:fontFamily="sans-serif-medium" />
+
+        <!-- Expression display -->
+        <TextView
+            android:id="@+id/tvExpression"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tvResult"
+            android:background="#1F1F1F"
+            android:gravity="end"
+            android:padding="16dp"
+            android:text="0"
+            android:textColor="#B0BEC5"
+            android:textSize="24sp"
+            android:fontFamily="sans-serif" />
+
+        <!-- Basic Number and Operation Buttons -->
+        <GridLayout
+            android:id="@+id/gridLayoutBasic"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tvExpression"
+            android:columnCount="4"
+            android:rowCount="5"
+            android:layout_marginTop="16dp">
+
+            <!-- Row 1 -->
+            <Button
+                android:id="@+id/button7"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_columnWeight="1"
+                android:text="7"
+                android:textSize="24sp"
+                android:textColor="#FFFFFF"
+                android:backgroundTint="#424242" />
+
+            <Button
+                android:id="@+id/button8"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_columnWeight="1"
+                android:text="8"
+                android:textSize="24sp"
+                android:textColor="#FFFFFF"
+                android:backgroundTint="#424242" />
+
+            <Button
+                android:id="@+id/button9"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_columnWeight="1"
+                android:text="9"
+                android:textSize="24sp"
+                android:textColor="#FFFFFF"
+                android:backgroundTint="#424242" />
+
+            <Button
+                android:id="@+id/buttonDivide"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_columnWeight="1"
+                android:text="/"
+                android:textSize="24sp"
+                android:textColor="#FF5722"
+                android:backgroundTint="#1F1F1F" />
+
+            <!-- Row 2 -->
+            <Button
+                android:id="@+id/button4"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_columnWeight="1"
+                android:text="4"
+                android:textSize="24sp"
+                android:textColor="#FFFFFF"
+                android:backgroundTint="#424242" />
+
+            <Button
+                android:id="@+id/button5"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_columnWeight="1"
+                android:text="5"
+                android:textSize="24sp"
+                android:textColor="#FFFFFF"
+                android:backgroundTint="#424242" />
+
+            <Button
+                android:id="@+id/button6"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_columnWeight="1"
+                android:text="6"
+                android:textSize="24sp"
+                android:textColor="#FFFFFF"
+                android:backgroundTint="#424242" />
+
+            <Button
+                android:id="@+id/buttonMultiply"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_columnWeight="1"
+                android:text="*"
+                android:textSize="24sp"
+                android:textColor="#FF5722"
+                android:backgroundTint="#1F1F1F" />
+
+            <!-- Row 3 -->
+            <Button
+                android:id="@+id/button1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_columnWeight="1"
+                android:text="1"
+                android:textSize="24sp"
+                android:textColor="#FFFFFF"
+                android:backgroundTint="#424242" />
+
+            <Button
+                android:id="@+id/button2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_columnWeight="1"
+                android:text="2"
+                android:textSize="24sp"
+                android:textColor="#FFFFFF"
+                android:backgroundTint="#424242" />
+
+            <Button
+                android:id="@+id/button3"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_columnWeight="1"
+                android:text="3"
+                android:textSize="24sp"
+                android:textColor="#FFFFFF"
+                android:backgroundTint="#424242" />
+
+            <Button
+                android:id="@+id/buttonMinus"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_columnWeight="1"
+                android:text="-"
+                android:textSize="24sp"
+                android:textColor="#FF5722"
+                android:backgroundTint="#1F1F1F" />
+
+            <!-- Row 4 -->
+            <Button
+                android:id="@+id/button0"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_columnWeight="1"
+                android:text="0"
+                android:textSize="24sp"
+                android:textColor="#FFFFFF"
+                android:backgroundTint="#424242" />
+
+            <Button
+                android:id="@+id/buttonClear"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_columnWeight="1"
+                android:text="C"
+                android:textSize="24sp"
+                android:textColor="#FF5722"
+                android:backgroundTint="#1F1F1F" />
+
+            <Button
+                android:id="@+id/buttonEqual"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_columnWeight="1"
+                android:text="="
+                android:textSize="24sp"
+                android:textColor="#FF5722"
+                android:backgroundTint="#1F1F1F" />
+
+            <Button
+                android:id="@+id/buttonPlus"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_columnWeight="1"
+                android:text="+"
+                android:textSize="24sp"
+                android:textColor="#FF5722"
+                android:backgroundTint="#1F1F1F" />
+        </GridLayout>
+
+        <!-- Label between grids -->
+
+        <TextView
+            android:id="@+id/labelScientific"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/gridLayoutBasic"
+            android:background="@drawable/gradient_background"
+        android:gravity="center"
+        android:padding="16dp"
+        android:text="Scientific Functions"
+        android:textColor="#C3FF5722"
+        android:textSize="28sp"
+        android:textStyle="italic"
+        android:layout_marginBottom="12dp"
+        android:layout_marginTop="12dp"
+        android:shadowColor="#000000"
+        android:shadowRadius="6"
+        android:shadowDx="3"
+        android:shadowDy="3" />
+<!--        <TextView-->
+<!--            android:id="@+id/labelScientific"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_below="@id/gridLayoutBasic"-->
+<!--            android:gravity="center"-->
+<!--            android:padding="10dp"-->
+<!--            android:text="Scientific Functions"-->
+<!--            android:textColor="#FF5722"-->
+<!--            android:textSize="22sp"-->
+<!--            android:textStyle="italic"-->
+<!--            android:visibility="visible" />-->
+
+    <!-- Scientific Calculator Buttons -->
+    <GridLayout
+        android:layout_width="wrap_content"
+        android:layout_height="308dp"
+        android:layout_below="@+id/labelScientific"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="0.5dp"
+        android:layout_marginEnd="0.5dp"
+        android:columnCount="4"
+        android:rowCount="6">
+
+        <!-- Row 5: Modulo, Power, Factorial, Sqrt -->
+
+        <Button
+            android:id="@+id/buttonModulo"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_columnWeight="1"
+            android:text="%"
+            android:textColor="#FFFFFF"
+            android:backgroundTint="#424242" />
+
+        <Button
+            android:id="@+id/buttonPower"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_columnWeight="1"
+            android:text="^"
+            android:textColor="#FFFFFF"
+            android:backgroundTint="#424242" />
+
+        <Button
+            android:id="@+id/buttonFactorial"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_columnWeight="1"
+            android:text="!Fact"
+            android:textColor="#FFFFFF"
+            android:backgroundTint="#424242" />
+
+        <Button
+            android:id="@+id/buttonSqrt"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_columnWeight="1"
+            android:text="√"
+            android:textColor="#FFFFFF"
+            android:backgroundTint="#424242" />
+
+        <!-- Row 6: Cbrt, Nth Root, Abs, Reciprocal -->
+        <Button
+            android:id="@+id/buttonCbrt"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_columnWeight="1"
+            android:onClick="onOperatorClick"
+            android:text="∛"
+            android:textColor="#FFFFFF"
+            android:backgroundTint="#424242"/>
+
+        <Button
+            android:id="@+id/btnNthRoot"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_columnWeight="1"
+            android:onClick="onOperatorClick"
+            android:text="nthroot"
+            android:textColor="#FFFFFF"
+            android:backgroundTint="#424242"/>
+
+        <Button
+            android:id="@+id/btnAbs"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_columnWeight="1"
+            android:backgroundTint="#424242"
+            android:onClick="onOperatorClick"
+            android:text="abs"
+            android:textColor="#FFFFFF" />
+
+        <Button
+            android:id="@+id/btnReciprocal"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_columnWeight="1"
+            android:onClick="onOperatorClick"
+            android:text="Reci"
+            android:textColor="#FFFFFF"
+            android:backgroundTint="#424242"/>
+
+        <!-- Row 7: Round, Trigonometric Functions -->
+        <Button
+            android:id="@+id/btnRound"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_columnWeight="1"
+            android:onClick="onOperatorClick"
+            android:text="round"
+            android:textColor="#FFFFFF"
+            android:backgroundTint="#424242"/>
+
+        <Button
+            android:id="@+id/buttonSin"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_columnWeight="1"
+            android:onClick="onOperatorClick"
+            android:text="sin"
+            android:textColor="#FFFFFF"
+            android:backgroundTint="#424242"/>
+
+        <Button
+            android:id="@+id/buttonCos"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_columnWeight="1"
+            android:onClick="onOperatorClick"
+            android:text="cos"
+            android:textColor="#FFFFFF"
+            android:backgroundTint="#424242"/>
+
+        <Button
+            android:id="@+id/buttonTan"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_columnWeight="1"
+            android:onClick="onOperatorClick"
+            android:text="tan"
+            android:textColor="#FFFFFF"
+            android:backgroundTint="#424242"/>
+
+        <!-- Row 8: Inverse Trigonometric Functions -->
+        <Button
+            android:id="@+id/buttonAsin"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_columnWeight="1"
+            android:onClick="onOperatorClick"
+            android:text="Sin\u207B\u00B9"
+            android:textColor="#FFFFFF"
+            android:backgroundTint="#424242"/>
+
+        <Button
+            android:id="@+id/buttonAcos"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_columnWeight="1"
+            android:onClick="onOperatorClick"
+            android:text="Cos\u207B\u00B9"
+            android:textColor="#FFFFFF"
+            android:backgroundTint="#424242"/>
+
+        <Button
+            android:id="@+id/buttonAtan"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_columnWeight="1"
+            android:onClick="onOperatorClick"
+            android:text="Tan\u207B\u00B9"
+            android:textColor="#FFFFFF"
+            android:backgroundTint="#424242"/>
+
+        <!-- Row 9: Logarithmic Functions -->
+        <Button
+            android:id="@+id/buttonLog"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_columnWeight="1"
+            android:onClick="onOperatorClick"
+            android:text="Log"
+            android:textColor="#FFFFFF"
+            android:backgroundTint="#424242"/>
+
+        <Button
+            android:id="@+id/buttonLn"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_columnWeight="1"
+            android:backgroundTint="#424242"
+            android:onClick="onOperatorClick"
+            android:text="ln"
+            android:textColor="#FFFFFF" />
+
+        <Button
+            android:id="@+id/buttonExp"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_columnWeight="1"
+            android:onClick="onOperatorClick"
+            android:text="Exp"
+            android:textColor="#FFFFFF"
+            android:backgroundTint="#424242"/>
+
+        <Button
+            android:id="@+id/buttonAntilog"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_columnWeight="1"
+            android:backgroundTint="#424242"
+            android:onClick="onOperatorClick"
+            android:text="Antilog"
+            android:textColor="#FFFFFF" />
+
+        <!-- Row 10: Constants -->
+        <Button
+            android:id="@+id/buttonPi"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_columnWeight="1"
+            android:onClick="onConstantClick"
+            android:text="π"
+            android:textColor="#FFFFFF"
+            android:backgroundTint="#424242"/>
+
+        <Button
+            android:id="@+id/buttonE"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_columnWeight="1"
+            android:onClick="onConstantClick"
+            android:text="e"
+            android:textColor="#FFFFFF"
+            android:backgroundTint="#424242"/>
+
+        <Button
+            android:id="@+id/buttonDel"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_columnWeight="1"
+            android:onClick="onClearDisplay"
+            android:text="CD"
+            android:textColor="#FF5722"
+            android:backgroundTint="#1F1F1F"/>
+
+        <Button
+            android:id="@+id/btn_decimal"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_columnWeight="1"
+            android:backgroundTint="#1F1F1F"
+            android:onClick="onDecimalClick"
+            android:text="."
+            android:textStyle="bold"
+            android:textAlignment="center"
+            android:textColor="#FF5722" />
+
+
+    </GridLayout>
+
+
+</RelativeLayout>
+</ScrollView>
