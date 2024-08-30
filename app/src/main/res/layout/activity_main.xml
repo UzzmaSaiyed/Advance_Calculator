@@ -9,7 +9,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="16dp">
+        android:padding="25dp">
 
         <!-- Display for the calculator -->
         <TextView
@@ -250,7 +250,7 @@
     <!-- Scientific Calculator Buttons -->
     <GridLayout
         android:layout_width="wrap_content"
-        android:layout_height="308dp"
+        android:layout_height="wrap_content"
         android:layout_below="@+id/labelScientific"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"

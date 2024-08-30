@@ -23,6 +23,8 @@ public class MainActivity extends AppCompatActivity {
 
     private boolean valueOneHasDecimal = false;
     private boolean valueTwoHasDecimal = false;
+    private boolean decimalExpression1 = false;
+    private boolean decimalExpression2 = false;
     private double decimalPlaces = 0;
     private int decimalValue = 0;
     private String decimalValuetemp1 = "";
@@ -30,6 +32,8 @@ public class MainActivity extends AppCompatActivity {
     private int c = 0;
     private int c1 = 0;
     private int c2 = 0;
+    private BigDecimal result;
+    private boolean checkdecimalinresult = false;
 
 
     // Constants
@@ -157,7 +161,8 @@ public class MainActivity extends AppCompatActivity {
 
             }
             else{
-            valueOne = (valueOne * 10) + Double.parseDouble(number);}
+            valueOne = (valueOne * 10) + Double.parseDouble(number);
+            System.out.println(valueOne);}
             expressionString.append(number);
             tvExpression.setText(expressionString.toString());}
 
@@ -219,14 +224,35 @@ public class MainActivity extends AppCompatActivity {
 
         if (!Double.isNaN(valueOne) && !Double.isNaN(valueTwo)) {
             try {
-                c =c1+c2;
-                BigDecimal result = BigDecimal.valueOf(performOperation(valueOne,valueTwo,currentOperation));
-                result = result.setScale(c, RoundingMode.HALF_UP);
-                expressionString.append(" = ").append(result.stripTrailingZeros().toPlainString());
+
+                result = BigDecimal.valueOf(performOperation(valueOne,valueTwo,currentOperation));
+                if(valueOneHasDecimal == true || valueTwoHasDecimal ==true)
+                {c =c1+c2;
+                    result = result.setScale(c, RoundingMode.HALF_UP);
+                }
+
+                DecimalFormat df = new DecimalFormat("#.##");
+                df.setMinimumFractionDigits(1); // Ensure at least one decimal place
+                df.setMaximumFractionDigits(10); // Allow up to 10 decimal places
+
+                result = result.setScale(10, BigDecimal.ROUND_HALF_UP);
+                tvResult.setText(String.valueOf(df.format(result)));
+                expressionString.append(" = ").append(df.format(result));
                 tvExpression.setText(expressionString.toString());
                 valueOne = result.doubleValue();
+
+                if(result.scale()>0)
+                {
+                    decimalExpression1 = true;
+                    checkdecimalinresult = true;
+                }
+                else
+                {
+                    decimalExpression1 = false;
+                }
                 System.out.println(valueOne);
                 valueTwo = Double.NaN;
+                decimalExpression2 = false;
             } catch (NumberFormatException | ArithmeticException e) {
                 tvResult.setText("Invalid input");
                 valueOne = Double.NaN;
@@ -250,11 +276,30 @@ public class MainActivity extends AppCompatActivity {
 
         if (!Double.isNaN(valueOne)) {
             try {
-                double result = performTrigoOperation(valueOne, operation);
+                result = BigDecimal.valueOf(performTrigoOperation(valueOne, operation));
 //                tvResult.setText(String.valueOf(result));
-                expressionString.append(" = ").append(result);
+                DecimalFormat df = new DecimalFormat("#.##");
+                df.setMinimumFractionDigits(1); // Ensure at least one decimal place
+                df.setMaximumFractionDigits(10); // Allow up to 10 decimal places
+
+                result = result.setScale(10, BigDecimal.ROUND_HALF_UP);
+                tvResult.setText(String.valueOf(df.format(result)));
+                expressionString.append(" = ").append(df.format(result));
                 tvExpression.setText(expressionString.toString());
-                valueOne = result;
+
+                if(result.scale()>0)
+                {
+                    decimalExpression1 = true;
+                    checkdecimalinresult = true;
+                }
+                else
+                {
+                    decimalExpression1 = false;
+                }
+                valueOne = result.doubleValue();
+//                valueTwo = Double.NaN;
+//                decimalExpression2 = false;
+
             } catch (NumberFormatException | ArithmeticException e) {
                 tvResult.setText("Invalid input");
                 valueOne = Double.NaN;
@@ -266,20 +311,36 @@ public class MainActivity extends AppCompatActivity {
     public void onLogClick(View view) {
         Button button = (Button) view;
         char operation = button.getText().toString().charAt(0);
-        if (Double.isNaN(valueOne))
-        {
-            currentOperation = operation;
-            expressionString.append(operation);
-            tvExpression.setText(expressionString.toString());
-        }
+//        if (Double.isNaN(valueOne))
+//        {
+//            currentOperation = operation;
+//            expressionString.append(operation);
+//            tvExpression.setText(expressionString.toString());
+//        }
 
         if (!Double.isNaN(valueOne)) {
             try {
-                double result = performLogOperation(valueOne, operation);
-//                tvResult.setText(String.valueOf(result));
-                expressionString.append(" = ").append(result);
+                result = BigDecimal.valueOf(performLogOperation(valueOne, operation));
+
+                DecimalFormat df = new DecimalFormat("#.##");
+                df.setMinimumFractionDigits(1); // Ensure at least one decimal place
+                df.setMaximumFractionDigits(10); // Allow up to 10 decimal places
+
+                result = result.setScale(10, BigDecimal.ROUND_HALF_UP);
+                tvResult.setText(String.valueOf(df.format(result)));
+                expressionString.append(" = ").append(df.format(result));
                 tvExpression.setText(expressionString.toString());
-                valueOne = result;
+
+                if(result.scale()>0)
+                {
+                    decimalExpression1 = true;
+                    checkdecimalinresult = true;
+                }
+                else
+                {
+                    decimalExpression1 = false;
+                }
+                valueOne = result.doubleValue();
             } catch (NumberFormatException | ArithmeticException e) {
                 tvResult.setText("Invalid input");
                 valueOne = Double.NaN;
@@ -321,14 +382,35 @@ public class MainActivity extends AppCompatActivity {
             valueTwo = 1;}
         if (!Double.isNaN(valueOne) && !Double.isNaN(valueTwo) && currentOperation != EQU) {
             try {
-                c =c1+c2;
-                BigDecimal result = BigDecimal.valueOf(performOperation(valueOne,valueTwo,currentOperation));
+
+                result = BigDecimal.valueOf(performOperation(valueOne,valueTwo,currentOperation));
+
+                if(valueOneHasDecimal == true || valueTwoHasDecimal ==true)
+                {c=c1+c2;
                 result = result.setScale(c, RoundingMode.HALF_UP);
-                tvResult.setText(String.valueOf(result.stripTrailingZeros().toPlainString()));
-                expressionString.append(" = ").append(result.stripTrailingZeros().toPlainString());
+                }
+                DecimalFormat df = new DecimalFormat("#.##");
+                df.setMinimumFractionDigits(1); // Ensure at least one decimal place
+                df.setMaximumFractionDigits(10); // Allow up to 10 decimal places
+
+
+                result = result.setScale(10, BigDecimal.ROUND_HALF_UP);
+                tvResult.setText(String.valueOf(df.format(result)));
+                expressionString.append(" = ").append(df.format(result));
+//                expressionString.append(" = ").append(result);
                 tvExpression.setText(expressionString.toString());
+
+                if(result.scale()>0)
+                {
+                    decimalExpression1 = true;
+                    checkdecimalinresult = true;
+                }
+                else
+                {
+                    decimalExpression1 = false;
+                }
                 valueOne = result.doubleValue();
-                System.out.println(valueOne);
+                System.out.println(valueOne + " " +result);
                 valueTwo = Double.NaN;
 
                 currentOperation = EQU;
@@ -338,7 +420,16 @@ public class MainActivity extends AppCompatActivity {
                 valueTwoHasDecimal = false;
                 decimalValuetemp1 = "";
                 decimalValuetemp2 = "";
-                c1 =c;
+                decimalExpression2 = false;
+
+                if((valueOneHasDecimal == false || valueTwoHasDecimal == false) && result.scale()>0)
+                {
+                    c1 = 4;
+                }
+                else
+                {
+                    c1 = c;
+                }
                 c2 =0;
 
             } catch (NumberFormatException | ArithmeticException e) {
@@ -362,6 +453,10 @@ public class MainActivity extends AppCompatActivity {
         valueTwoHasDecimal = false;
         decimalValuetemp1 = "";
         decimalValuetemp2 = "";
+        decimalExpression1 = false;
+        decimalExpression2 = false;
+        checkdecimalinresult = true;
+        result = BigDecimal.valueOf(0);
         c = 0;
         c1 = 0;
         c2 = 0;
@@ -374,24 +469,40 @@ public class MainActivity extends AppCompatActivity {
     public void onDecimalClick(View view) {
         // only printing .
 //        String currentText = tvExpression.getText().toString();
-        if(!Double.isNaN(valueOne) && Double.isNaN(valueTwo) && valueOneHasDecimal==false)
-        {
+        if (!Double.isNaN(valueOne) && Double.isNaN(valueTwo) && valueOneHasDecimal == false) {
             valueOneHasDecimal = true;
             decimalPlaces = 1;
 
         }
-        if(!Double.isNaN(valueOne) && !Double.isNaN(valueTwo) && valueTwoHasDecimal==false && currentOperation != EQU){
+        if (!Double.isNaN(valueOne) && !Double.isNaN(valueTwo) && valueTwoHasDecimal == false && currentOperation != EQU) {
             valueTwoHasDecimal = true;
             decimalPlaces = 1;
 
         }
-            tvExpression.append(".");
+
+        if (!Double.isNaN(valueOne) && Double.isNaN(valueTwo) && valueOneHasDecimal == true && decimalExpression1 == false) {
             expressionString.append(".");
             tvExpression.setText(expressionString.toString());
-//            if(!Double.isNaN(valueOne) && Double.isNaN(valueTwo))
-//            {
-//                valueOne = Decimal(valueOne);
-//            }
+            decimalExpression1 = true;
+
+        }
+        if (!Double.isNaN(valueOne) && !Double.isNaN(valueTwo) && valueTwoHasDecimal == true && currentOperation != EQU && decimalExpression2 == false) {
+            expressionString.append(".");
+            tvExpression.setText(expressionString.toString());
+            decimalExpression2 = true;
+
+        }
+
+        if (checkdecimalinresult == true && result.scale()>0 && Double.isNaN(valueTwo))
+        {
+            expressionString.setLength(0); // Reset expressionString
+            expressionString.append("0.");
+            tvExpression.setText(expressionString.toString());
+            decimalExpression1 = true;
+            System.out.println(valueOne  + " " + result );
+            valueOne = 0;
+            System.out.println(valueOne  + " " + result );
+        }
 
     }
 
