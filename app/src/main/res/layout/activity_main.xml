@@ -6,6 +6,7 @@
     android:fillViewport="true"
     android:background="#121212"> <!-- Dark Background -->
 
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -313,10 +314,10 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_columnWeight="1"
+            android:backgroundTint="#424242"
             android:onClick="onOperatorClick"
-            android:text="nthroot"
-            android:textColor="#FFFFFF"
-            android:backgroundTint="#424242"/>
+            android:text="nthrt"
+            android:textColor="#FFFFFF" />
 
         <Button
             android:id="@+id/btnAbs"

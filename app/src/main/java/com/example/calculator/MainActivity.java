@@ -16,6 +16,7 @@ public class MainActivity extends AppCompatActivity {
 
     private TextView tvExpression;
     private TextView tvResult;
+    private Button btndot;
     private double valueOne = Double.NaN;
     private double valueTwo = Double.NaN;
     private char currentOperation;
@@ -34,6 +35,8 @@ public class MainActivity extends AppCompatActivity {
     private int c2 = 0;
     private BigDecimal result;
     private boolean checkdecimalinresult = false;
+
+
 
 
     // Constants
@@ -83,6 +86,7 @@ public class MainActivity extends AppCompatActivity {
 
         tvExpression = findViewById(R.id.tvExpression);
         tvResult = findViewById(R.id.tvResult);
+        btndot = findViewById(R.id.btn_decimal);
         setupButtonListeners();
     }
 
@@ -131,11 +135,33 @@ public class MainActivity extends AppCompatActivity {
             expressionString.append(" "+number);
             tvExpression.setText(expressionString.toString());
         }else if (!Double.isNaN(valueOne) && currentOperation != EQU && (currentOperation == FACTORIAL || currentOperation == SQRT || currentOperation == CBRT ||  currentOperation == ROUND || currentOperation == ABS || currentOperation == RECIPROCAL)) {
-            valueOne = (valueOne*10) + Double.parseDouble(number);
-            //expressionString.setLength(0); // Clear previous expression
-            System.out.println(valueOne + " " + " " + number );
+            if(valueOneHasDecimal == true)
+            {
+                decimalValuetemp1 += number;
+                decimalValue = Integer.parseInt(decimalValuetemp1);
+                System.out.println("temp: "+decimalValuetemp1);
+                int a = decimalValuetemp1.length();
+                c1 = a;
+                System.out.println("Size of temp: "+a+" "+c1);
+                double b = decimalValue/Math.pow(10,a);
+                System.out.println("decimal value: "+b);
+
+                valueOne = floor(valueOne) + b;
+//                valueOne = valueOne + Double.parseDouble(number)/10;
+                System.out.println(valueOne +" "+ number);
+
+            }
+            else{
+                valueOne = (valueOne * 10) + Double.parseDouble(number);
+                System.out.println(valueOne);}
             expressionString.append(number);
             tvExpression.setText(expressionString.toString());
+
+//            valueOne = (valueOne*10) + Double.parseDouble(number);
+//            //expressionString.setLength(0); // Clear previous expression
+//            System.out.println(valueOne + " " + " " + number );
+//            expressionString.append(number);
+//            tvExpression.setText(expressionString.toString());
         }
         else if (Double.isNaN(valueOne)) {
             valueOne = Double.parseDouble(number);
@@ -161,8 +187,8 @@ public class MainActivity extends AppCompatActivity {
 
             }
             else{
-            valueOne = (valueOne * 10) + Double.parseDouble(number);
-            System.out.println(valueOne);}
+                valueOne = (valueOne * 10) + Double.parseDouble(number);
+                System.out.println(valueOne);}
             expressionString.append(number);
             tvExpression.setText(expressionString.toString());}
 
@@ -172,6 +198,7 @@ public class MainActivity extends AppCompatActivity {
             valueTwo = Double.parseDouble(number);
             expressionString.append(" "+ number);
             tvExpression.setText(expressionString.toString());
+            btndot.setEnabled(true);
         }
         else if (currentOperation != EQU && !Double.isNaN(valueTwo)) {
             // An operator is selected, set valueTwo
@@ -195,7 +222,7 @@ public class MainActivity extends AppCompatActivity {
                 System.out.println(valueTwo +" "+ number);
             }
             else{
-            valueTwo = (valueTwo*10) + Double.parseDouble(number);}
+                valueTwo = (valueTwo*10) + Double.parseDouble(number);}
             expressionString.append(number);
             tvExpression.setText(expressionString.toString());
         }else {
@@ -253,6 +280,8 @@ public class MainActivity extends AppCompatActivity {
                 System.out.println(valueOne);
                 valueTwo = Double.NaN;
                 decimalExpression2 = false;
+                btndot.setEnabled(true);
+
             } catch (NumberFormatException | ArithmeticException e) {
                 tvResult.setText("Invalid input");
                 valueOne = Double.NaN;
@@ -387,7 +416,7 @@ public class MainActivity extends AppCompatActivity {
 
                 if(valueOneHasDecimal == true || valueTwoHasDecimal ==true)
                 {c=c1+c2;
-                result = result.setScale(c, RoundingMode.HALF_UP);
+                    result = result.setScale(c, RoundingMode.HALF_UP);
                 }
                 DecimalFormat df = new DecimalFormat("#.##");
                 df.setMinimumFractionDigits(1); // Ensure at least one decimal place
@@ -421,6 +450,7 @@ public class MainActivity extends AppCompatActivity {
                 decimalValuetemp1 = "";
                 decimalValuetemp2 = "";
                 decimalExpression2 = false;
+                btndot.setEnabled(true);
 
                 if((valueOneHasDecimal == false || valueTwoHasDecimal == false) && result.scale()>0)
                 {
@@ -457,6 +487,7 @@ public class MainActivity extends AppCompatActivity {
         decimalExpression2 = false;
         checkdecimalinresult = true;
         result = BigDecimal.valueOf(0);
+        btndot.setEnabled(true);
         c = 0;
         c1 = 0;
         c2 = 0;
@@ -472,11 +503,15 @@ public class MainActivity extends AppCompatActivity {
         if (!Double.isNaN(valueOne) && Double.isNaN(valueTwo) && valueOneHasDecimal == false) {
             valueOneHasDecimal = true;
             decimalPlaces = 1;
+            //set dot button disable - solve
+             btndot.setEnabled(false);
+
 
         }
         if (!Double.isNaN(valueOne) && !Double.isNaN(valueTwo) && valueTwoHasDecimal == false && currentOperation != EQU) {
             valueTwoHasDecimal = true;
             decimalPlaces = 1;
+            btndot.setEnabled(false);
 
         }
 
