@@ -36,8 +36,8 @@ public class MainActivity extends AppCompatActivity {
     private BigDecimal result;
     private boolean checkdecimalinresult = false;
     private boolean forc = false;
+    private String temp="";
 
-    private char currentOperation2;
 
 
 
@@ -154,27 +154,8 @@ public class MainActivity extends AppCompatActivity {
                 double b = decimalValue/Math.pow(10,a);
                 System.out.println("decimal value: "+b);
 
-
-                if(forc == true)
-                {
-                    String valueOneStr = String.valueOf(valueOne);
-                    String[] parts = valueOneStr.split("\\.");
-                    if (parts.length == 1) {
-                        // valueOne does not have a decimal part
-                        valueOneStr += "." + decimalValuetemp1;
-                    } else {
-                        // valueOne already has a decimal part
-                        valueOneStr = parts[0] + "." + parts[1] + decimalValuetemp1;
-                    }
-                    valueOne = Double.parseDouble(valueOneStr);
-                    System.out.println("if forc is true then..."+valueOne);
-                    decimalValuetemp1 = ""; // Clear the decimalValuetemp1 variable
-                }
-                else
-                {
-                    valueOne = floor(valueOne) + b;
-                    System.out.println("if forc is false then..."+valueOne);
-                }
+                valueOne = floor(valueOne) + b;
+                System.out.println("if forc is false then..."+valueOne);
                 System.out.println(valueOne +" "+ number);
 
             }
@@ -184,11 +165,6 @@ public class MainActivity extends AppCompatActivity {
             expressionString.append(number);
             tvExpression.setText(expressionString.toString());
 
-//            valueOne = (valueOne*10) + Double.parseDouble(number);
-//            //expressionString.setLength(0); // Clear previous expression
-//            System.out.println(valueOne + " " + " " + number );
-//            expressionString.append(number);
-//            tvExpression.setText(expressionString.toString());
         }
         else if (Double.isNaN(valueOne)) {
             valueOne = Double.parseDouble(number);
@@ -196,7 +172,10 @@ public class MainActivity extends AppCompatActivity {
             tvExpression.setText(expressionString.toString());
         } else if (currentOperation == EQU) {
             if(valueOneHasDecimal == true) {
+
                 decimalValuetemp1 += number;
+                temp += decimalValuetemp1;
+                System.out.println("new temp: " + temp);
                 decimalValue = Integer.parseInt(decimalValuetemp1);
                 System.out.println("temp: " + decimalValuetemp1);
                 int a = decimalValuetemp1.length();
@@ -210,22 +189,13 @@ public class MainActivity extends AppCompatActivity {
                 }
 
                 System.out.println("Size of temp: " + a + " " + c1);
+
+
                 double b = decimalValue / Math.pow(10, a);
                 System.out.println("decimal value: " + b);
 
                 if(forc == true)
                 {
-                    String valueOneStr = String.valueOf(valueOne);
-                    String[] parts = valueOneStr.split("\\.");
-                    if (parts.length == 1) {
-                        // valueOne does not have a decimal part
-                        valueOneStr += "." + decimalValuetemp1;
-                    } else {
-                        // valueOne already has a decimal part
-                        valueOneStr = parts[0] + "." + parts[1] + decimalValuetemp1;
-                    }
-                    valueOne = Double.parseDouble(valueOneStr);
-                    System.out.println("if forc is true then..."+valueOne);
                     decimalValuetemp1 = ""; // Clear the decimalValuetemp1 variable
                 }
                 else
@@ -275,56 +245,6 @@ public class MainActivity extends AppCompatActivity {
             }
             else{
                 valueTwo = (valueTwo*10) + Double.parseDouble(number);}
-            expressionString.append(number);
-            tvExpression.setText(expressionString.toString());
-        }else if(currentOperation2 != 0 && !Double.isNaN(valueOne))
-        {
-            if(valueOneHasDecimal == true) {
-                decimalValuetemp1 += number;
-                decimalValue = Integer.parseInt(decimalValuetemp1);
-                System.out.println("temp: " + decimalValuetemp1);
-                int a = decimalValuetemp1.length();
-
-                if(forc == true)
-                {
-                    c1 = 10;
-                }
-                else {
-                    c1 = a;
-                }
-
-                System.out.println("Size of temp: " + a + " " + c1);
-                double b = decimalValue / Math.pow(10, a);
-                System.out.println("decimal value: " + b);
-
-                if(forc == true)
-                {
-                    String valueOneStr = String.valueOf(valueOne);
-                    String[] parts = valueOneStr.split("\\.");
-                    if (parts.length == 1) {
-                        // valueOne does not have a decimal part
-                        valueOneStr += "." + decimalValuetemp1;
-                    } else {
-                        // valueOne already has a decimal part
-                        valueOneStr = parts[0] + "." + parts[1] + decimalValuetemp1;
-                    }
-                    valueOne = Double.parseDouble(valueOneStr);
-                    System.out.println("if forc is true then..."+valueOne);
-                    decimalValuetemp1 = ""; // Clear the decimalValuetemp1 variable
-                }
-                else
-                {
-                    valueOne = floor(valueOne) + b;
-                    System.out.println("if forc is false then..."+valueOne);
-                }
-
-//                valueOne = valueOne + Double.parseDouble(number)/10;
-                System.out.println(valueOne + " " + number);
-
-            }
-            else{
-                valueOne = (valueOne * 10) + Double.parseDouble(number);
-                System.out.println(valueOne);}
             expressionString.append(number);
             tvExpression.setText(expressionString.toString());
         }
@@ -387,6 +307,7 @@ public class MainActivity extends AppCompatActivity {
                 btndot.setEnabled(true);
                 decimalValuetemp1 = "";
                 decimalValuetemp2 = "";
+                temp="";
 
                 if(result.scale()>0)
                 {
@@ -420,7 +341,6 @@ public class MainActivity extends AppCompatActivity {
     public void onTrigoClick(View view) {
         Button button = (Button) view;
         char operation = button.getText().toString().charAt(0);
-        currentOperation2 = operation;
 
 
         if (!Double.isNaN(valueOne)) {
@@ -453,6 +373,7 @@ public class MainActivity extends AppCompatActivity {
 //                decimalExpression2 = false;
                 decimalValuetemp1 = "";
 //                decimalValuetemp2 = "";
+                temp="";
 
 
             } catch (NumberFormatException | ArithmeticException e) {
@@ -466,7 +387,6 @@ public class MainActivity extends AppCompatActivity {
     public void onLogClick(View view) {
         Button button = (Button) view;
         char operation = button.getText().toString().charAt(0);
-        currentOperation2 = operation;
 //        if (Double.isNaN(valueOne))
 //        {
 //            currentOperation = operation;
@@ -501,6 +421,7 @@ public class MainActivity extends AppCompatActivity {
                 }
                 valueOne = result.doubleValue();
                 decimalValuetemp1 = "";
+                temp="";
             } catch (NumberFormatException | ArithmeticException e) {
                 tvResult.setText("Invalid input");
                 valueOne = Double.NaN;
@@ -544,6 +465,22 @@ public class MainActivity extends AppCompatActivity {
         if (!Double.isNaN(valueOne) && !Double.isNaN(valueTwo) && currentOperation != EQU) {
             try {
 
+                if(forc==true)
+                {
+                    String valueOneStr = String.valueOf(valueOne);
+                    String[] parts = valueOneStr.split("\\.");
+                    if (parts.length == 1) {
+                        // valueOne does not have a decimal part
+                        valueOneStr += "." + temp;
+                    } else {
+                        // valueOne already has a decimal part
+                        valueOneStr = parts[0] + "." + parts[1] + temp;
+                    }
+//                    String valueOneStr = String.valueOf(valueOne)+dummy;
+                    valueOne = Double.parseDouble(valueOneStr);
+                    System.out.println("if forc is true then..."+valueOne+"  "+ valueOneStr);
+                }
+
                 result = BigDecimal.valueOf(performOperation(valueOne,valueTwo,currentOperation));
 
                 if(valueOneHasDecimal == true || valueTwoHasDecimal ==true)
@@ -574,9 +511,9 @@ public class MainActivity extends AppCompatActivity {
                 valueOne = result.doubleValue();
                 System.out.println(valueOne + " " +result);
                 valueTwo = Double.NaN;
+                temp="";
 
                 currentOperation = EQU;
-                currentOperation2 = 0;
                 decimalPlaces = 0;
                 decimalValue = 0;
                 if(result.scale()>0)
@@ -619,7 +556,6 @@ public class MainActivity extends AppCompatActivity {
         valueOne = Double.NaN;
         valueTwo = Double.NaN;
         currentOperation = EQU;
-        currentOperation2 = 0;
         decimalPlaces = 0;
         decimalValue = 0;
         expressionString.setLength(0); // Reset expressionString
@@ -636,6 +572,7 @@ public class MainActivity extends AppCompatActivity {
         c = 0;
         c1 = 0;
         c2 = 0;
+        temp="";
     }
 
     public void onClearDisplay(View view) {
