@@ -263,15 +263,17 @@
             app:layout_constraintTop_toBottomOf="@id/labelScientific">
 
             <!-- Row 5: Modulo, Power, Factorial, Sqrt -->
+
             <Button
-                android:id="@+id/buttonModulo"
+                android:id="@+id/buttonParenthesis"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_columnWeight="1"
-                android:backgroundTint="#424242"
-                android:text="%"
-                android:textColor="#FFFFFF"
-                android:textSize="22sp" />
+                android:backgroundTint="#1F1F1F"
+                android:onClick="onParenthesisClick"
+                android:text="( )"
+                android:textColor="#FF5722"
+                android:textSize="20sp" />
 
             <Button
                 android:id="@+id/buttonDel"
@@ -282,7 +284,7 @@
                 android:text="CD"
                 android:textColor="#FF5722"
                 android:backgroundTint="#1F1F1F"
-                android:textSize="22sp"/>
+                android:textSize="20sp"/>
 
             <Button
                 android:id="@+id/btn_decimal"
@@ -295,7 +297,7 @@
                 android:textStyle="bold"
                 android:textAlignment="center"
                 android:textColor="#FF5722"
-                android:textSize="22sp"/>
+                android:textSize="20sp"/>
 
             <Button
                 android:id="@+id/buttonSqrt"
@@ -305,7 +307,7 @@
                 android:text="√"
                 android:textColor="#FFFFFF"
                 android:backgroundTint="#424242"
-                android:textSize="22sp"/>
+                android:textSize="20sp"/>
 
 
             <!-- Row 6: Cbrt, Nth Root, Abs, Reciprocal -->
@@ -318,7 +320,7 @@
                 android:text="∛"
                 android:textColor="#FFFFFF"
                 android:backgroundTint="#424242"
-                android:textSize="22sp"/>
+                android:textSize="20sp"/>
 
             <Button
                 android:id="@+id/btnNthRoot"
@@ -329,7 +331,7 @@
                 android:onClick="onOperatorClick"
                 android:text="nthrt"
                 android:textColor="#FFFFFF"
-                android:textSize="22sp"/>
+                android:textSize="20sp"/>
 
             <Button
                 android:id="@+id/btnAbs"
@@ -340,7 +342,7 @@
                 android:onClick="onOperatorClick"
                 android:text="abs"
                 android:textColor="#FFFFFF"
-                android:textSize="22sp"/>
+                android:textSize="20sp"/>
 
             <Button
                 android:id="@+id/btnReciprocal"
@@ -351,7 +353,7 @@
                 android:text="Reci"
                 android:textColor="#FFFFFF"
                 android:backgroundTint="#424242"
-                android:textSize="22sp"/>
+                android:textSize="20sp"/>
 
             <!-- Row 7: Round, Trigonometric Functions -->
             <Button
@@ -363,7 +365,7 @@
                 android:text="round"
                 android:textColor="#FFFFFF"
                 android:backgroundTint="#424242"
-                android:textSize="22sp"/>
+                android:textSize="20sp"/>
 
             <Button
                 android:id="@+id/buttonSin"
@@ -374,7 +376,7 @@
                 android:text="sin"
                 android:textColor="#FFFFFF"
                 android:backgroundTint="#424242"
-                android:textSize="22sp"/>
+                android:textSize="20sp"/>
 
             <Button
                 android:id="@+id/buttonCos"
@@ -385,7 +387,7 @@
                 android:text="cos"
                 android:textColor="#FFFFFF"
                 android:backgroundTint="#424242"
-                android:textSize="22sp"/>
+                android:textSize="20sp"/>
 
             <Button
                 android:id="@+id/buttonTan"
@@ -396,7 +398,7 @@
                 android:text="tan"
                 android:textColor="#FFFFFF"
                 android:backgroundTint="#424242"
-                android:textSize="22sp"/>
+                android:textSize="20sp"/>
 
             <!-- Row 8: Inverse Trigonometric Functions -->
             <Button
@@ -408,7 +410,7 @@
                 android:text="Sin⁻¹"
                 android:textColor="#FFFFFF"
                 android:backgroundTint="#424242"
-                android:textSize="22sp"/>
+                android:textSize="20sp"/>
 
             <Button
                 android:id="@+id/buttonAcos"
@@ -419,7 +421,7 @@
                 android:text="Cos⁻¹"
                 android:textColor="#FFFFFF"
                 android:backgroundTint="#424242"
-                android:textSize="22sp"/>
+                android:textSize="20sp"/>
 
             <Button
                 android:id="@+id/buttonAtan"
@@ -430,7 +432,7 @@
                 android:text="Tan⁻¹"
                 android:textColor="#FFFFFF"
                 android:backgroundTint="#424242"
-                android:textSize="22sp"/>
+                android:textSize="20sp"/>
 
             <Button
                 android:id="@+id/buttonLog"
@@ -441,7 +443,7 @@
                 android:text="log"
                 android:textColor="#FFFFFF"
                 android:backgroundTint="#424242"
-                android:textSize="22sp"/>
+                android:textSize="20sp"/>
 
             <Button
                 android:id="@+id/buttonLn"
@@ -452,7 +454,7 @@
                 android:onClick="onOperatorClick"
                 android:text="ln"
                 android:textColor="#FFFFFF"
-                android:textSize="22sp"/>
+                android:textSize="20sp"/>
 
             <Button
                 android:id="@+id/buttonAntilog"
@@ -463,7 +465,7 @@
                 android:onClick="onOperatorClick"
                 android:text="Antilog"
                 android:textColor="#FFFFFF"
-                android:textSize="22sp"/>
+                android:textSize="20sp"/>
 
             <Button
                 android:id="@+id/buttonExp"
@@ -474,7 +476,7 @@
                 android:text="Exp"
                 android:textColor="#FFFFFF"
                 android:backgroundTint="#424242"
-                android:textSize="22sp"/>
+                android:textSize="20sp"/>
 
 
 
@@ -488,7 +490,7 @@
                 android:text="π"
                 android:textColor="#FFFFFF"
                 android:backgroundTint="#424242"
-                android:textSize="22sp"/>
+                android:textSize="20sp"/>
 
             <Button
                 android:id="@+id/buttonE"
@@ -499,7 +501,7 @@
                 android:text="e"
                 android:textColor="#FFFFFF"
                 android:backgroundTint="#424242"
-                android:textSize="22sp"/>
+                android:textSize="20sp"/>
 
             <Button
                 android:id="@+id/buttonPower"
@@ -509,7 +511,7 @@
                 android:text="^"
                 android:textColor="#FFFFFF"
                 android:backgroundTint="#424242"
-                android:textSize="22sp"/>
+                android:textSize="20sp"/>
 
 
             <Button
@@ -520,7 +522,19 @@
                 android:text="!Fact"
                 android:textColor="#FFFFFF"
                 android:backgroundTint="#424242"
-                android:textSize="22sp"/>
+                android:textSize="20sp"/>
+
+            <Button
+                android:id="@+id/buttonModulo"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_columnWeight="1"
+                android:backgroundTint="#424242"
+                android:text="%"
+                android:textColor="#FFFFFF"
+                android:textSize="20sp" />
+
+
 
         </GridLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>

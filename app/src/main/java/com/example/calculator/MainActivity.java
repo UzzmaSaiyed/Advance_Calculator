@@ -38,6 +38,9 @@ public class MainActivity extends AppCompatActivity {
     private boolean forc = false;
     private String temp="";
 
+    private boolean isLeftParenthesis = true;
+
+
 
 
 
@@ -49,8 +52,8 @@ public class MainActivity extends AppCompatActivity {
     // Basic Arithmetic Operations
     private static final char ADDITION = '+';
     private static final char SUBTRACTION = '-';
-    private static final char MULTIPLICATION = '*';
-    private static final char DIVISION = '/';
+    private static final char MULTIPLICATION = '×';
+    private static final char DIVISION = '÷';
 
     // Advanced Arithmetic Operations
     private static final char MODULUS = '%';
@@ -288,7 +291,17 @@ public class MainActivity extends AppCompatActivity {
 
                 result = result.setScale(10, BigDecimal.ROUND_HALF_UP);
                 tvResult.setText(String.valueOf(df.format(result)));
-                expressionString.append(" = ").append(df.format(result));
+
+                if(isLeftParenthesis==true)
+                {
+                    expressionString.append(" = ").append(df.format(result));
+                    isLeftParenthesis=false;
+                }
+                else
+                {
+                    expressionString.append(") = ").append(df.format(result));
+                    isLeftParenthesis=true;
+                }
                 tvExpression.setText(expressionString.toString());
                 valueOne = result.doubleValue();
 
@@ -495,7 +508,17 @@ public class MainActivity extends AppCompatActivity {
 
                 result = result.setScale(10, BigDecimal.ROUND_HALF_UP);
                 tvResult.setText(String.valueOf(df.format(result)));
-                expressionString.append(" = ").append(df.format(result));
+                if(isLeftParenthesis==true)
+                {
+                    expressionString.append(" = ").append(df.format(result));
+                    isLeftParenthesis=false;
+                }
+                else
+                {
+                    expressionString.append(") = ").append(df.format(result));
+                    isLeftParenthesis=true;
+                }
+
 //                expressionString.append(" = ").append(result);
                 tvExpression.setText(expressionString.toString());
 
@@ -529,6 +552,7 @@ public class MainActivity extends AppCompatActivity {
                 decimalValuetemp2 = "";
                 decimalExpression2 = false;
                 btndot.setEnabled(true);
+                isLeftParenthesis = true;
 
                 if(result.scale()>0)
                 {
@@ -573,6 +597,7 @@ public class MainActivity extends AppCompatActivity {
         c1 = 0;
         c2 = 0;
         temp="";
+        isLeftParenthesis = true;
     }
 
     public void onClearDisplay(View view) {
@@ -713,4 +738,17 @@ public class MainActivity extends AppCompatActivity {
                 throw new ArithmeticException("Invalid logarithmic operation");
         }
     }
+
+    public void onParenthesisClick(View view) {
+        if (isLeftParenthesis) {
+            expressionString.append("(");
+            isLeftParenthesis = false;
+        } else {
+            expressionString.append(")");
+            isLeftParenthesis = true;
+        }
+
+        tvExpression.setText(expressionString.toString());
+    }
+
 }
